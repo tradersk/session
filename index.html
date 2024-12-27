@@ -990,6 +990,73 @@
                 margin-bottom: 10px;
             }
         }
+
+        /* Mobile Responsiveness Improvements */
+        @media screen and (max-width: 768px) {
+            .card-container {
+                padding: 10px;
+                gap: 15px;
+            }
+
+            .card {
+                flex: 1 1 calc(100% - 20px);
+                max-width: 100%;
+                min-width: 280px;
+                margin: 10px;
+                padding: 20px 15px;
+            }
+
+            .card h2 {
+                font-size: 1.6em;
+                margin-bottom: 15px;
+                padding: 0 10px;
+            }
+
+            .card p {
+                font-size: 1.1em;
+                padding: 0 5px;
+                margin: 10px 0;
+            }
+
+            .strategy-points {
+                padding: 0 10px;
+            }
+
+            .strategy-points li {
+                font-size: 0.95em;
+                padding-left: 22px;
+                margin-bottom: 10px;
+                line-height: 1.5;
+                background-position: left 4px;
+                word-wrap: break-word;
+                white-space: normal;
+            }
+
+            .card .fee {
+                font-size: 1.1em;
+                margin: 8px 0;
+            }
+
+            .card .join-btn {
+                margin-top: 15px;
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+        }
+
+        /* Extra small devices */
+        @media screen and (max-width: 380px) {
+            .card {
+                margin: 10px 5px;
+                padding: 15px 10px;
+            }
+
+            .strategy-points li {
+                font-size: 0.9em;
+                padding-left: 20px;
+                background-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
