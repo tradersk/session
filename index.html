@@ -943,6 +943,53 @@
                 text-align: center;
             }
         }
+
+        /* Fix for hero image circle shape on mobile */
+        @media screen and (max-width: 768px) {
+            .intro-section img {
+                width: 200px; /* Fixed width */
+                height: 200px; /* Same as width to maintain circle */
+                min-width: 200px; /* Prevent distortion */
+                margin: 0 auto 20px auto;
+            }
+        }
+
+        /* Fix for card width and padding on mobile */
+        @media screen and (max-width: 768px) {
+            .intro-section {
+                margin: 10px;
+                padding: 25px;
+                width: auto;
+            }
+
+            .card {
+                width: calc(100% - 20px);
+                min-width: auto;
+                margin: 10px;
+                padding: 25px;
+            }
+
+            .card-container {
+                padding: 10px;
+            }
+
+            /* Improve text readability on mobile */
+            .card h2 {
+                font-size: 1.4em;
+                margin-bottom: 15px;
+            }
+
+            .card p {
+                font-size: 0.95em;
+                line-height: 1.5;
+            }
+
+            .strategy-points li {
+                font-size: 0.95em;
+                line-height: 1.4;
+                margin-bottom: 10px;
+            }
+        }
     </style>
 </head>
 <body>
