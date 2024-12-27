@@ -120,8 +120,9 @@
             justify-content: center;
             gap: 20px;
             padding: 20px;
-            max-width: 1200px;
+            max-width: 1400px; /* Increased to match hero section */
             margin: auto;
+            width: calc(100% - 40px); /* Account for container padding */
         }
 
         /* Individual Card Styling */
@@ -293,11 +294,42 @@
 
             .card-container {
                 flex-direction: column;
+                width: calc(100% - 20px); /* Reduced side spacing on mobile */
+                padding: 10px;
+                margin: 0 auto;
             }
 
             .card {
                 flex: 1 1 100%;
                 margin-bottom: 20px;
+                width: calc(100% - 20px);
+                margin: 10px;
+                padding: 25px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.2em;
+            }
+            
+            /* Further reduce padding */
+            .container {
+                padding: 5px;
+            }
+            
+            /* Adjust any multi-column layouts to single column */
+            .card-container {
+                flex-direction: column;
+                width: calc(100% - 10px); /* Minimal spacing on smaller screens */
+                padding: 5px;
+            }
+            
+            .card {
+                width: 100%;
+                margin-bottom: 15px;
+                margin: 5px;
+                padding: 20px 15px;
             }
         }
 
