@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trader SK - Swing Trading Strategies</title>
+	 <link rel="icon" href="logo.png" type="image/png"> 
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        
+        header {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .header-logo {
+            width: 150px; /* Adjust the size as needed */
+            height: auto;
+        }
+
+        header h1 {
+            font-size: 2em;
+            color: white; /* Change text color to white */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .intro-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+            padding: 40px;
+            background: linear-gradient(90deg, rgba(0,123,255,1) 0%, rgba(0,51,102,1) 100%);
+            border-radius: 10px;
+            margin: 20px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .intro-section .text-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .intro-section .text-content h1 {
+            font-size: 2.5em;
+            color: white;
+        }
+
+        .intro-section .text-content p {
+            font-size: 1.2em;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .intro-section img {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 20px;
+            background-color: #e0e0e0;
+            border: 4px solid white;
+            transition: transform 0.3s ease;
+        }
+
+        .intro-section img:hover {
+            transform: scale(1.02);
+        }
+
+        .background-section {
+            padding: 20px 0; /* Reduced from 50px */
+            margin-top: 20px; /* Add small top margin */
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        h2.section-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        p.description {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        /* Card Container */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Individual Card Styling */
+        .card {
+            border-radius: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex: 0 1 calc(50% - 20px);
+            margin: 0;
+            padding: 25px;
+            min-width: 300px;
+            box-sizing: border-box;
+            text-align: center; /* Centering content inside */
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Stocks Intraday Card */
+        .card:nth-child(1) {
+            background: linear-gradient(135deg, #3b45b3, #351385);
+        }
+
+        /* Gold Swing Trading Card */
+        .card:nth-child(2) {
+            background: linear-gradient(135deg, #7c7407, #0d941f);
+        }
+
+        /* Matching button colors */
+        .card:nth-child(1) .join-btn {
+            background-color: #3949ab;
+        }
+
+        .card:nth-child(2) .join-btn {
+            background-color: #ff5722;
+        }
+
+        .card:nth-child(1) .join-btn:hover {
+            background-color: #5c6bc0;
+        }
+
+        .card:nth-child(2) .join-btn:hover {
+            background-color: #ff7043;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Card Image Styling */
+        .card img {
+            width: 500px;
+            height: 250px;
+            margin-bottom: 15px;
+            border-radius: 0%; /* Makes the image circular */
+            object-fit: cover;
+            background-color: #e0e0e0;
+            border: 1px solid white;
+        }
+
+        .card h2 {
+            font-size: 1.5em;
+            color: white;
+            margin-bottom: 10px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .card p {
+            font-size: 1em;
+            color: white;
+        }
+
+        .card .fee {
+            font-size: 1.2em;
+            color: white;
+            margin-top: 10px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .card .join-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff9a00; /* Matches the gradient style */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: scale(1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card .join-btn:hover {
+            background-color: #ff4f4f; /* Button hover effect */
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Popup styles */
+        .popup {
+            display: none; /* Hidden by default */
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .popup img {
+            width: 300px; /* Adjust QR code size as needed */
+            height: auto;
+        }
+
+        .close-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff4f4f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .intro-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .intro-section img {
+                order: -1;
+                margin: 0 auto 20px auto;
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .card-container {
+                flex-direction: column;
+            }
+
+            .card {
+                flex: 1 1 100%;
+                margin-bottom: 20px;
+            }
+        }
+
+        footer {
+            background-color: #f9f9f9;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #ddd;
+        }
+
+        footer img {
+            width: 200px;
+            margin-bottom: 20px;
+        }
+
+        footer .social-links a {
+            margin: 0 15px;
+            color: #333;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        footer .social-links a:hover {
+            color: #ff7f7f;
+        }
+
+        footer .disclaimer {
+            font-size: 0.9em;
+            color: #888;
+            margin-top: 20px;
+        }
+
+        .strategy-points {
+            text-align: left; /* Align text to the left */
+            list-style: none; /* Remove default list style */
+            padding-left: 0; /* Remove left padding */
+            color: white; /* Set text color to white */
+            margin: 15px 0;
+        }
+
+        .strategy-points li {
+            margin-bottom: 8px; /* Add spacing between each point */
+            padding-left: 25px; /* Add some left padding for custom bullet points */
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Eo_circle_green_checkmark.svg/1024px-Eo_circle_green_checkmark.svg.png') no-repeat left center; /* Custom bullet icon */
+            background-size: 15px; /* Resize icon */
+            transform: translateX(0);
+            transition: transform 0.3s ease;
+            padding: 4px 0 4px 25px;
+            line-height: 1.4;
+        }
+
+        .strategy-points li:hover {
+            transform: translateX(5px);
+        }
+
+        /* Add/modify these CSS rules in your existing <style> tag */
+
+        /* Base responsive settings */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* General responsive containers */
+        .container {
+            width: 100%;
+            padding: 15px;
+            margin: 0 auto;
+        }
+
+        /* Responsive header */
+        header {
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .header-logo {
+            width: 120px;
+            max-width: 100%;
+        }
+
+        /* Media Queries */
+        @media screen and (max-width: 768px) {
+            header {
+                padding: 10px;
+            }
+            
+            header h1 {
+                font-size: 1.5em;
+            }
+            
+            .header-logo {
+                width: 100px;
+            }
+            
+            /* Adjust container padding for mobile */
+            .container {
+                padding: 10px;
+            }
+        }
+
+        /* Small mobile devices */
+        @media screen and (max-width: 480px) {
+            header h1 {
+                font-size: 1.2em;
+            }
+            
+            /* Further reduce padding */
+            .container {
+                padding: 5px;
+            }
+            
+            /* Adjust any multi-column layouts to single column */
+            .card-container {
+                flex-direction: column;
+            }
+            
+            .card {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+        }
+
+        /* Ensure images don't overflow their containers */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Better touch targets for mobile */
+        button, 
+        .join-btn,
+        a {
+            min-height: 44px;
+            min-width: 44px;
+            padding: 12px 20px;
+        }
+
+        .welcome-container {
+            text-align: center;
+            padding: 2rem 1rem;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        .welcome-greeting {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .welcome-name {
+            font-size: 1.8rem;
+            color: white;
+            line-height: 1.4;
+        }
+
+        @media screen and (max-width: 768px) {
+            .welcome-greeting {
+                font-size: 2rem;
+            }
+            .welcome-name {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .welcome-greeting {
+                font-size: 1.6rem;
+            }
+            .welcome-name {
+                font-size: 1.2rem;
+            }
+            .credentials {
+                display: block;
+                margin-top: 0.5rem;
+            }
+        }
+
+        .name-container {
+            display: inline-block;
+        }
+
+        .welcome-name,
+        .welcome-credentials {
+            display: inline-block;
+        }
+
+        @media screen and (max-width: 480px) {
+            .name-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .welcome-name,
+            .welcome-credentials {
+                display: block;
+                width: 100%;
+            }
+
+            .welcome-credentials {
+                font-size: 1rem;
+                color: rgba(255, 255, 255, 0.9);
+            }
+        }
+
+        .name-wrapper {
+            display: inline;
+        }
+        
+        .welcome-credentials {
+            display: inline;
+            color: white;
+        }
+    
+        @media screen and (max-width: 480px) {
+            .name-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .welcome-credentials {
+                display: block;
+                font-size: 1rem;
+                opacity: 0.9;
+            }
+        }
+
+        .name-stack {
+            display: inline;
+        }
+
+        .name-stack .name,
+        .name-stack .credentials {
+            display: inline;
+            color: white;
+            font-size: 1.8rem; /* Match welcome-name size */
+            line-height: 1.4;
+        }
+
+        .name-stack .credentials {
+            margin-left: 8px;
+            font-size: 1.6rem; /* Slightly smaller for credentials */
+        }
+
+        @media screen and (max-width: 480px) {
+            .name-stack {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .name-stack .name {
+                font-size: 1.4rem;
+            }
+
+            .name-stack .credentials {
+                font-size: 1.2rem;
+                margin-top: 4px;
+                margin-left: 0;
+            }
+        }
+
+        .title-section {
+            text-align: center;
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .title-section h2 {
+            font-size: 2.2em;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            line-height: 1.3;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .title-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #2563eb, #1e40af);
+            border-radius: 2px;
+        }
+
+        .title-section p {
+            font-size: 1.3em;
+            color: #4b5563;
+            max-width: 800px;
+            margin: 25px auto 0;
+            line-height: 1.6;
+        }
+
+        .title-section .language-options {
+            margin-top: 15px;
+            color: #6b7280;
+            font-size: 1.1em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .title-section .language-options span {
+            padding: 8px 15px;
+            background: #f3f4f6;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        @media screen and (max-width: 768px) {
+            .title-section {
+                padding: 25px 15px;
+            }
+
+            .title-section h2 {
+                font-size: 1.8em;
+            }
+
+            .title-section p {
+                font-size: 1.1em;
+            }
+
+            .title-section .language-options {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Enhanced Mobile Experience */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .card {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .title-section {
+                padding: 30px 15px;
+            }
+        }
+
+        /* Updated Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .popup-content {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+            margin: 20px;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: scale(0.9);
+            animation: scaleIn 0.3s ease-out forwards;
+        }
+
+        .popup-content h2 {
+            color: #2563eb;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .popup-content p {
+            color: #4b5563;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .popup-content img {
+            width: 200px;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .upi-id {
+            background: #f3f4f6;
+            padding: 12px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 1.1em;
+            color: #2563eb;
+            border: 2px dashed #2563eb;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #ef4444;
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .close-btn:hover {
+            background: #dc2626;
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Mobile responsiveness */
+        @media screen and (max-width: 480px) {
+            .popup-content {
+                margin: 15px;
+                padding: 20px;
+            }
+
+            .popup-content h2 {
+                font-size: 1.5em;
+            }
+
+            .popup-content p {
+                font-size: 1em;
+            }
+        }
+
+        /* FAQ Section Styles */
+        .faq-section {
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            color: #2563eb;
+            font-size: 2em;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            background: #f8fafc;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: #1e293b;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #f1f5f9;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 300px;
+        }
+
+        .faq-item.active .faq-question {
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .faq-toggle {
+            font-size: 1.5em;
+            color: #2563eb;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        @media screen and (max-width: 768px) {
+            .faq-section {
+                padding: 40px 15px;
+            }
+
+            .faq-section h2 {
+                font-size: 1.8em;
+            }
+        }
+
+        .intro-bio {
+            max-width: 1100px; /* Increased from 900px */
+            width: 90%; /* Added to ensure some margin on very wide screens */
+            margin: 60px auto;
+            padding: 40px 60px; /* Increased padding for better text container */
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: left;
+            line-height: 1.8;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .intro-bio p {
+            color: #1e293b;
+            font-size: 1.2em; /* Increased from 1.2em */
+            margin: 0;
+            line-height: 1.6; /* Adjusted for better readability with larger font */
+        }
+
+        .intro-bio strong {
+            color: #2563eb;
+            font-weight: 600;
+            font-size: 1.05em; /* Slightly larger than surrounding text */
+        }
+
+        @media screen and (max-width: 768px) {
+            .intro-bio {
+                width: 95%;
+                padding: 25px;
+                margin: 40px auto;
+            }
+
+            .intro-bio p {
+                font-size: 1.2em; /* Slightly smaller on mobile but still prominent */
+            }
+        }
+
+        /* Maintain mobile responsiveness */
+        @media screen and (max-width: 768px) {
+            .intro-bio {
+                width: 95%;
+                padding: 20px;
+                margin: 40px auto;
+            }
+        }
+        
+        hr {
+            margin: 15px 0; /* Reduced margin around HR */
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+        .title-section .languages-inline {
+            color: #4b5563;
+            font-size: 1.1em;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .title-section .languages-inline span {
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .title-section .languages-inline .separator {
+            color: #9ca3af;
+            margin: 0 4px;
+        }
+
+        @media screen and (max-width: 480px) {
+            .title-section .languages-inline {
+                flex-direction: row;
+                gap: 6px;
+                padding: 0 10px;
+            }
+
+            .title-section .languages-inline span {
+                font-size: 0.95em;
+            }
+
+            .title-section .languages-inline .label {
+                width: 100%;
+                margin-bottom: 5px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header section -->
+    <header>
+        <a href="index.html">
+            <img src="logo_header.png" alt="Trader SK Logo" class="header-logo">
+        </a>
+    </header>
+
+    <!-- Introduction Section -->
+    <div class="container">
+        <div class="intro-section">
+            <div class="text-content">
+                <div class="welcome-container">
+                    <div class="welcome-greeting">Welcome, My Friends 👋</div>
+                    <div class="name-stack">
+                        <div class="name">I'm Sreekrishnan SK</div>
+                        <div class="credentials">(B.com CA, MCA)</div>
+                    </div>
+                </div>
+            </div>
+            <img src="sk.jpeg" alt="Placeholder Image">
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="intro-bio">
+            <p>Hi there, I'm <strong>Sreekrishnan K</strong>. I am from Kerala and have a strong interest in both finance and technology. With over six years of experience in the share market, I have gained a deep understanding of the financial industry and especially, share market.</p>
+            <br>
+            <p>I am an active Trader in Indian Markets and along with that, I have the opportunity to share my trading and stock market knowledge with more than <strong>1000+ members</strong>, and have conducted over <strong>300+ individual 1-1 Live Educational sessions</strong>.</p>
+        </div>
+    </div>
+<hr>
+    <!-- Background section to visually separate Master Your Financial Strategies -->
+    <div class="background-section">
+        <div class="container">
+            <div class="title-section">
+                <h2>I Teach What I Trade, and Trade What I Teach</h2>
+                <p>Learn my personal strategies on a 1-1 session</p>
+                <div class="languages-inline">
+                    <span class="label">Session available in:</span>
+                    <span>English</span>
+                    <span class="separator">•</span>
+                    <span>Tamil</span>
+                    <span class="separator">•</span>
+                    <span>Malayalam</span>
+                </div>
+            </div>
+            
+            <div class="card-container">
+                <!-- Card 1: Stock intraday Trading -->
+                <div class="card">
+                    <h2>Stocks Intraday Trading</h2>
+                    <p>Simple Intraday Setup you will ever see!</p><br>
+					
+				                    <ul class="strategy-points">
+                 
+	   <li>✅ How do I select Trending Stocks for Intraday?</li>
+       <li>✅ Long Entry (BUY SIDE)</li>
+       <li>✅ Gap Filling Entry( SELL SIDE)</li>
+		<li>✅Target & Stoploss</li>
+		<li>✅Risk & Money Management</li>
+		<li>✅Intraday Psychology</li>
+			<li>✅Lifetime Free Community Channel Support</li>
+
+                    <center><br>
+					  <p class="fee">1-1 Live Google Meet Session</p> <p class="fee">Fee: ₹5000/-</p>
+					<button class="join-btn" id="stockJoinBtn">Join Now</button></center>
+					  
+					  					
+                </div>
+				
+				
+
+                <!-- Card 2: Gold Swing Trading -->
+                <div class="card">
+                    <h2>Gold Swing Trading</h2>
+                    <p>My Swing Trading System!</p><br>
+                    <ul class="strategy-points">
+	   <li>✅ Simplest, High Probable & Stress-free Swing Trading Method!</li>    
+	   <li>✅ No complex chart analysis, screeners or stock selection</li>
+       <li>✅ Simple Swing Trading Method with less screen time</li>
+           <li>✅ Simple setup requires only a few minutes daily</li>
+       <li>✅ 1-3 High Probable Trades Per Month</li>
+       <li>✅ Min 1:2 Risk Reward Ratio</li>
+	   <li>✅Lifetime Free Community Channel Support</li>
+
+
+                    </ul>
+                   <br>
+                     <p class="fee">1-1 Live Google Meet Session</p> <p class="fee">Fee: ₹5000/-</p>
+                    <button class="join-btn" id="goldJoinBtn">Join Now</button>
+                </div>
+            </div>
+        </div>	
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <div class="faq-question">
+                How does the 1-1 session work?
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                The session will be conducted via Google Meet. After payment confirmation, we'll schedule a convenient time for both of us. The session typically lasts 1.5-2 hours where I'll explain everything in detail.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                What language options are available?
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                Sessions are available in English, Tamil, and Malayalam. You can choose your preferred language during scheduling.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                Will I get support after the session?
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                Yes, you'll get lifetime access to our community channel where you can clarify your doubts and discuss trading ideas. You can also DM me for any doubts related to the strategy.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                How do I make the payment?
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                Please DM me for session timings. You can make the payment via UPI. After clicking the 'Join Now' button, you'll see the payment details. Once payment is confirmed, I will share the Google Meet Link and we can meet at your preferred time.
+            </div>
+        </div>
+    </div>
+
+	
+	  <!-- Contact Section -->
+    <div class="contact-section" style="text-align: center; padding: 40px 0; background-color: #ffff;">
+        <h2 style="font-size: 1.6em; color: #333; margin-bottom: 20px;">Contact me for any queries</h2>
+        <div style="display: flex; justify-content: center; gap: 20px;">
+
+            <!-- Telegram Button -->
+            <a href="https://t.me/sreekrishnansk" target="_blank" style="display: inline-flex; align-items: center; background-color: #0088cc; padding: 10px 20px; border-radius: 8px; color: white; text-decoration: none; font-weight: bold;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" style="width: 24px; height: 24px; margin-right: 10px;">
+                Telegram DM
+            </a>
+
+            <!-- Instagram Button -->
+            <a href="https://www.instagram.com/tradersk_stockmarket/" target="_blank" style="display: inline-flex; align-items: center; background-color: #E4405F; padding: 10px 20px; border-radius: 8px; color: white; text-decoration: none; font-weight: bold;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 24px; height: 24px; margin-right: 10px;">
+                Instagram DM
+            </a>
+
+        </div>
+    </div>
+
+
+    <!-- Popup for Stocks Swing Trading -->
+    <div class="popup" id="stocksPopup">
+        <div class="popup-content">
+            <button class="close-btn" onclick="closePopup('stocksPopup')">×</button>
+            <h2>Stocks Intraday Trading</h2>
+            <p>Please make the payment of ₹5,000 to my UPI ID and share the screenshot in Instagram/Telegram DM.</p>
+                       <img src="qr.jpg" alt="QR Code">
+            <div class="upi-id">
+                <span>sreekrishnansk@upi</span>
+            </div>
+        
+        </div>
+    </div>
+
+    <!-- Popup for Gold Swing Trading -->
+    <div class="popup" id="goldPopup">
+        <div class="popup-content">
+            <button class="close-btn" onclick="closePopup('goldPopup')">×</button>
+            <h2>GOLD Swing Trading Session</h2>
+            <p>Please make the payment of ₹5,000 to my UPI ID and share the screenshot in Instagram/Telegram DM.</p>
+            <img src="qr.jpg" alt="QR Code">
+            <div class="upi-id">
+                <span>sreekrishnansk@upi</span>
+            </div>
+         
+        </div>
+    </div>
+
+    <script>
+        // Function to show the popup
+        function showPopup(popupId) {
+            document.getElementById(popupId).style.display = 'flex';
+        }
+
+        // Function to close the popup
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+        }
+
+        // Adding event listeners to buttons
+        document.querySelector('.card:nth-child(1) .join-btn').addEventListener('click', function() {
+            showPopup('stocksPopup');
+        });
+
+        document.querySelector('.card:nth-child(2) .join-btn').addEventListener('click', function() {
+            showPopup('goldPopup');
+        });
+
+        // FAQ Toggle Functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+    </script>
+
+    <!-- Footer Section -->
+    <footer>
+        <img src="logo.png" alt="Trader SK Logo">
+        <div class="social-links">
+                     <a href="https://www.instagram.com/tradersk_stockmarket/">Instagram</a>
+                           </div>
+        <p class="disclaimer">Disclaimer: I am not registered with SEBI (Securities and Exchange Board of India) and the information provided on this website, Instagram, Telegram Community, Telegram Public Channel and in webinars is for educational purposes only. Trading in the stock market carries inherent risks and it is important to understand that "I am not providing any recommendations or offering a stock tips service". The content should be treated as educational in nature and any trading decisions made are done at your own risk. Seek independent advice before making financial decisions.</p>
+    </footer>
+</body>
+</html>
