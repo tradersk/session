@@ -1057,6 +1057,56 @@
                 background-size: 12px;
             }
         }
+
+        /* Mobile Responsiveness Improvements */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 5px;  /* Reduced from 15px */
+            }
+
+            .card-container {
+                padding: 5px;  /* Reduced from 10px */
+                gap: 10px;    /* Reduced from 15px */
+            }
+
+            .card {
+                flex: 1 1 100%;
+                max-width: 100%;
+                min-width: none;  /* Removed min-width constraint */
+                margin: 5px;     /* Reduced from 10px */
+                padding: 20px 12px; /* Reduced side padding */
+                width: calc(100% - 10px); /* Adjusted width calculation */
+            }
+
+            .background-section {
+                padding: 10px 0; /* Reduced padding */
+            }
+
+            .strategy-points {
+                padding: 0 5px; /* Reduced padding */
+            }
+
+            .strategy-points li {
+                padding-left: 20px; /* Slightly reduced */
+                margin-bottom: 8px;
+            }
+        }
+
+        /* Extra small devices */
+        @media screen and (max-width: 380px) {
+            .container {
+                padding: 2px; /* Further reduced */
+            }
+
+            .card {
+                margin: 5px 2px; /* Minimal margins */
+                padding: 15px 8px;
+            }
+
+            .card-container {
+                padding: 2px;
+            }
+        }
     </style>
 </head>
 <body>
