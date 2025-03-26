@@ -1,0 +1,2982 @@
+/* Reuse existing theme styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px; /* reduced padding for tidiness */
+            background: var(--header-bg);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .header-left { display: flex; align-items: center; gap: 10px; }
+        .header-actions { display: flex; gap: 10px; }
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(162, 119, 255, 0.1);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode .theme-toggle:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 600;
+            background: var(--title-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
+        }
+
+        /* Nav tabs styles */
+        .nav-tabs {
+            display: flex;
+            background: rgba(30, 30, 40, 0.5);
+            padding: 4px;
+            border-radius: 12px;
+            gap: 4px;
+            margin-right: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .nav-tab {
+            color: #94a3b8;
+            padding: 8px 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            position: relative;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 1;
+        }
+        
+        .nav-tab.active {
+            color: #fff;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+        
+        .nav-tab:not(.active):hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Remove badge styles */
+        .nav-tab i {
+            font-size: 14px;
+        }
+        
+        /* Add smooth transition animation */
+        .nav-tab {
+            transform-origin: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-tab.active {
+            transform: translateY(-1px);
+        }
+        
+        /* Tab content styles */
+        .tab-content {
+            display: none;
+            width: 100%;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+
+        .dashboard-grid {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+            transition: all 0.5s ease;
+        }
+
+        .side-panel {
+            grid-column: 2;  /* Changed from 1 to 2 */
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .pnl-card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;  /* Add position relative for gradient animation */
+            overflow: hidden;  /* Hide overflow for gradient animation */
+            transition: all 0.3s ease;
+        }
+
+        .pnl-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: var(--gradient-profit);
+            transition: transform 0.5s ease;
+            z-index: 0;
+        }
+
+        .pnl-card.loss::before {
+            background: var(--gradient-loss);
+        }
+
+        .pnl-card.animate::before {
+            transform: translateX(50%);
+        }
+
+        .pnl-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .pnl-info {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;  /* Align text to the left */
+        }
+
+        .pnl-label {
+            font-size: 12px;
+            color: #a0a0a0;
+            margin-bottom: 5px;
+        }
+
+        .pnl-amount {
+            font-size: 28px;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        .pnl-details {
+            display: flex;
+            gap: 15px;
+            margin-top: 5px;
+        }
+
+        .pnl-detail {
+            font-size: 11px;
+            color: #a0a0a0;
+        }
+
+        .positive { color: #22c55e; }
+        .negative { color: #ef4444; }
+
+        .orders-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .mini-card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            height: 300px;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+
+        .mini-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mtm-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode .card {
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-right: 20px;
+        }
+
+        .value-card {
+            text-align: center;
+        }
+
+        .value-label {
+            font-size: 12px;
+            color: #a0a0a0;
+            margin-bottom: 5px;
+        }
+
+        .value-amount {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .positions-card {
+            grid-column: 1;  /* Changed from 2 to 1 */
+            grid-row: 1 / span 2;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--table-header-bg);
+            color: var(--table-header-color);
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+        body.light-mode th {
+            background: var(--table-header-bg);
+            color: var(--table-header-color);
+            font-weight: 600;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        tr:hover {
+            background: var(--table-hover-bg);
+        }
+
+        .position-row {
+            transition: background-color 0.3s;
+        }
+
+        .status-badge {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .status-complete {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .status-pending {
+            background: rgba(234, 179, 8, 0.2);
+            color: #eab308;
+            border: 1px solid rgba(234, 179, 8, 0.3);
+        }
+
+        .price-change {
+            display: none;
+        }
+
+        .price-up {
+            display: none;
+        }
+
+        .price-down {
+            display: none;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-buy {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .btn-sell {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .stat-item {
+            flex: 1;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #a0a0a0;
+        }
+
+        @media screen and (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .positions-card {
+                grid-column: 1;
+                grid-row: auto;
+            }
+
+            .mtm-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .orders-overview {
+            margin-top: 15px;
+        }
+
+        .status-badge {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .position-row td {
+            padding: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        th {
+            background: var(--table-header-bg);
+            color: var(--table-header-color);
+            font-weight: 600;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.05);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .position-row:hover {
+            background: var(--table-hover-bg);
+            box-shadow: inset 0 0 0 1px rgba(99, 102, 241, 0.1);
+        }
+
+        /* Footer stick to bottom */
+        footer.footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--header-bg);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            padding: 10px 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        /* Order type badge */
+        .order-type-buy {
+            background: rgba(45, 212, 191, 0.2);
+            color: #2dd4bf;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+            border: 1px solid rgba(45, 212, 191, 0.3);
+        }
+        .order-type-sell {
+            color: #ef4444;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* Theme Variables */
+        :root {
+            /* Dark Theme (Default) */
+            --bg-primary: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+            --bg-card: rgba(26, 26, 38, 0.95);
+            --text-primary: #ffffff;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --gradient-profit: linear-gradient(45deg, rgba(34, 197, 94, 0.25), rgba(134, 239, 172, 0.35));
+            --gradient-loss: linear-gradient(45deg, rgba(239, 68, 68, 0.25), rgba(252, 165, 165, 0.35));
+            --header-bg: rgba(45, 45, 65, 0.7);
+            --card-bg: rgba(45, 45, 65, 0.7);
+            --table-header-bg: rgba(0, 0, 0, 0.2);
+            --table-hover-bg: rgba(255, 255, 255, 0.05);
+            --search-bg: rgba(0, 0, 0, 0.2);
+            --title-gradient: linear-gradient(120deg, #a277ff, #61ffca);
+            --theme-icon: 'fa-moon';
+            --table-header-color: #a277ff;
+        }
+
+        /* Apply theme variables to body */
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        /* Apply theme variables to cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Apply theme variables to tables */
+        th {
+            background: var(--table-header-bg);
+            color: var(--table-header-color);
+        }
+
+        tr:hover {
+            background: var(--table-hover-bg);
+        }
+
+        /* Apply theme variables to search boxes */
+        .search-box, .positions-search-box {
+            background: var(--search-bg);
+        }
+
+        /* Light Theme - Enhanced with more vibrant colors */
+        body.light-mode {
+            --bg-primary: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+            --bg-card: rgba(255, 255, 255, 0.95);
+            --text-primary: #1a1a2e;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --gradient-profit: linear-gradient(45deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.35));
+            --gradient-loss: linear-gradient(45deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.35));
+            --header-bg: rgba(255, 255, 255, 0.9);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --table-header-bg: rgba(99, 102, 241, 0.08);
+            --table-hover-bg: rgba(99, 102, 241, 0.04);
+            --search-bg: rgba(240, 240, 255, 0.9);
+            --title-gradient: linear-gradient(120deg, #6366f1, #8b5cf6);
+            --theme-icon: 'fa-moon';
+            --text-secondary: #4b5563;
+            --positive-color: #10b981;
+            --negative-color: #ef4444;
+            --badge-bg: rgba(255, 255, 255, 0.9);
+            --table-header-color: #6366f1;
+        }
+
+        /* Product type badge */
+        .product-type {
+            background: rgba(162, 119, 255, 0.1);
+            color: #a277ff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        /* Add to CSS */
+        .position-row.closed {
+            opacity: 0.6;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .orders-overview .card {
+            min-height: 400px;  /* Increased height */
+        }
+
+        .mtm-details, .mtm-item, .mtm-label, .mtm-value {
+            display: none;
+        }
+
+        .positions-count {
+            background: rgba(162, 119, 255, 0.15);
+            color: #a277ff;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-left: 8px;
+            border: 1px solid rgba(162, 119, 255, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .positions-count i {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .mtm-details {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .mtm-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .mtm-label, .mtm-value {
+            color: #a0a0a0;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        .mtm-label {
+            font-weight: 500;
+        }
+
+        .mtm-value {
+            font-weight: 600;
+        }
+
+        .mtm-value.positive {
+            color: #22c55e;
+        }
+
+        .mtm-value.negative {
+            color: #ef4444;
+        }
+
+        /* Update Orders table styles */
+        .orders-overview table td {
+            padding: 12px 8px;
+            line-height: 1.4;
+        }
+
+        .order-price {
+            font-size: 12px;
+            color: #a0a0a0;
+            margin-top: 2px;
+        }
+
+        .positions-header {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* ---------------- BEGIN CONSOLIDATED MTM STYLES ---------------- */
+        /* Clear out conflicting mtm-display definitions */
+        .mtm-display {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            min-width: 200px;
+            position: relative;
+            overflow: hidden; /* Important for containing the animation */
+        }
+
+        .mtm-display.profit::before, .mtm-display.loss::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 300%;
+            height: 100%;
+            background-size: 200% 100%;
+            animation: gradientFlow 5s ease-in-out infinite;
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .mtm-display.profit::before {
+            background: linear-gradient(90deg, 
+                rgba(34, 197, 94, 0.05), 
+                rgba(34, 197, 94, 0.15), 
+                rgba(34, 197, 94, 0.2), 
+                rgba(34, 197, 94, 0.15), 
+                rgba(34, 197, 94, 0.05));
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .mtm-display.loss::before {
+            background: linear-gradient(90deg, 
+                rgba(239, 68, 68, 0.05), 
+                rgba(239, 68, 68, 0.15), 
+                rgba(239, 68, 68, 0.2), 
+                rgba(239, 68, 68, 0.15), 
+                rgba(239, 68, 68, 0.05));
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        @keyframes gradientFlow {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(33.33%); }
+            100% { transform: translateX(0); }
+        }
+
+        .mtm-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            z-index: 1;
+            position: relative;
+        }
+
+        .mtm-label, .mtm-value {
+            color: #a0a0a0;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        .mtm-label {
+            font-weight: 500;
+        }
+
+        .mtm-value {
+            font-weight: 600;
+        }
+
+        .mtm-value.positive {
+            color: #22c55e;
+        }
+
+        .mtm-value.negative {
+            color: #ef4444;
+        }
+        /* ---------------- END CONSOLIDATED MTM STYLES ---------------- */
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            color: #a0a0a0;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--search-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 6px 10px;
+            width: 180px;
+            margin-left: auto;
+            transition: all 0.3s ease;
+        }
+
+        .search-box i {
+            color: var(--text-primary);
+            margin-right: 8px;
+            font-size: 12px;
+        }
+
+        body.light-mode .search-box {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            box-shadow: 0 2px 6px rgba(99, 102, 241, 0.05);
+        }
+
+        body.light-mode .search-box:focus-within {
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.1);
+        }
+
+        .search-box input {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            width: 100%;
+            font-size: 13px;
+            outline: none;
+        }
+
+        body.light-mode .search-box i {
+            color: #6366f1;
+        }
+
+        .last-update {
+            font-family: monospace;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        .status-indicator .fa-circle {
+            transition: opacity 0.5s;
+        }
+
+        .status-indicator.active .fa-circle {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        /* Footer info */
+        .footer-info {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align to the left */
+            gap: 10px; /* Add some space between text and time */
+            margin-top: auto !important;
+            padding-top: 8px !important;
+            border-top: 1px solid var(--border-color);
+            font-size: 12px;
+            color: #a0a0a0;
+            flex: 0 0 auto !important;
+        }
+
+        .footer-info span {
+            margin-right: 10px; /* Add some space between text and time */
+        }
+
+        .positions-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+        
+        .positions-title {
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .positions-status {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-left: 15px;
+        }
+
+        /* Create separate styles for position search box */
+        .positions-search-box {
+            display: flex;
+            align-items: center;
+            background: var(--search-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 6px 10px;
+            width: 150px;
+            margin-left: 0;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .positions-search-box input {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            width: 100%;
+            font-size: 13px;
+            outline: none;
+        }
+
+        body.light-mode .positions-search-box {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            box-shadow: 0 2px 6px rgba(99, 102, 241, 0.05);
+        }
+
+        body.light-mode .positions-search-box:focus-within {
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.1);
+        }
+
+        /* Order switch styles */
+        .order-filters {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 0;
+            flex: 1;
+        }
+
+        .order-segmented-control {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            background: var(--header-bg);
+            border-radius: 8px;
+            padding: 3px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .segmented-btn {
+            padding: 6px 12px;
+            border: none;
+            background: none;
+            color: #a0a0a0;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 6px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .segmented-btn.active {
+            color: #fff;
+            font-weight: 600;
+            background: rgba(162, 119, 255, 0.4);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .segmented-btn:not(.active):hover {
+            color: #e2e2e2;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-right: 20px;
+        }
+
+        /* Add animation for theme switch */
+        .dashboard-grid, .card, .header, body {
+            transition: background 0.5s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Positions count badge enhancement */
+        body.light-mode .positions-count {
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        /* Improve last update display */
+        body.light-mode .last-update {
+            background: rgba(240, 240, 255, 0.6);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: #6366f1;
+            font-family: monospace;
+        }
+
+        /* Status indicator improvement */
+        body.light-mode .status-indicator .fa-circle {
+            opacity: 0.7;
+        }
+
+        body.light-mode #openIndicator i {
+            color: #10b981 !important;
+        }
+
+        body.light-mode .status-indicator i {
+            color: #6366f1 !important;
+        }
+
+        /* Add animation for button click */
+        .theme-toggle:active {
+            transform: scale(0.95);
+        }
+
+        /* More light mode enhancements */
+        body.light-mode .status-badge {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Enhance buttons for light mode */
+        a.back-btn {
+            color: var(--text-primary);
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        a.back-btn:hover {
+            color: #a277ff;
+            transform: translateX(-2px);
+        }
+
+        body.light-mode a.back-btn:hover {
+            color: #6366f1;
+        }
+
+        /* Add subtle animation for positions hover in light mode */
+        body.light-mode .position-row {
+            transition: all 0.2s ease;
+        }
+
+        body.light-mode .position-row:hover {
+            transform: translateX(2px);
+            background-color: rgba(99, 102, 241, 0.04);
+        }
+
+        /* Enhance MTM display animation */
+        body.light-mode .mtm-display {
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+        }
+
+        body.light-mode .mtm-display.profit {
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        body.light-mode .mtm-display.loss {
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        body.light-mode .mtm-display.profit::before {
+            animation: gradientFlowLight 5s ease-in-out infinite;
+        }
+
+        body.light-mode .mtm-display.loss::before {
+            animation: gradientFlowLight 5s ease-in-out infinite;
+        }
+
+        @keyframes gradientFlowLight {
+            0% { transform: translateX(0); opacity: 0.4; }
+            50% { transform: translateX(33.33%); opacity: 0.6; }
+            100% { transform: translateX(0); opacity: 0.4; }
+        }
+
+        /* Fix specific styles for the MTM display inline styles */
+        #mtm, .mtm-label {
+            height: 18px !important;
+            line-height: 18px !important;
+        }
+
+        /* Fix remaining font size and padding issues */
+        body.light-mode td {
+            border-bottom: 1px solid rgba(99, 102, 241, 0.05);
+            padding: 8px;
+        }
+
+        body.light-mode th {
+            padding: 8px;
+            font-size: 12px;
+        }
+
+        /* Fix status badge and order type badge styles */
+        body.light-mode .order-type-buy {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            font-size: 11px;
+            padding: 2px 6px;
+        }
+
+        body.light-mode .order-type-sell {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            font-size: 11px;
+            padding: 2px 6px;
+        }
+
+        body.light-mode .status-badge {
+            font-size: 11px;
+            padding: 2px 6px;
+        }
+
+        body.light-mode .product-type {
+            font-size: 11px;
+            padding: 2px 6px;
+        }
+
+        /* Fix positions count */
+        .positions-count {
+            font-size: 12px;
+            padding: 3px 8px;
+        }
+
+        /* Fix positions title */
+        .positions-title {
+            font-size: 18px;
+        }
+
+        /* Additional fixes for light mode */
+        body.light-mode .positions-title {
+            font-size: 18px;
+        }
+
+        /* Fix segmented button styles for light mode */
+        body.light-mode .segmented-btn {
+            color: #6366f1;
+            font-size: 12px;
+            padding: 6px 12px;
+        }
+
+        body.light-mode .segmented-btn.active {
+            background: rgba(99, 102, 241, 0.15);
+            color: #4f46e5;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
+            font-size: 12px;
+        }
+
+        /* Enhanced MTM Display Styles */
+        .mtm-display {
+            background: rgba(26, 26, 38, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            min-width: 220px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .mtm-display.profit {
+            background: linear-gradient(
+                165deg,
+                rgba(34, 197, 94, 0.05) 0%,
+                rgba(26, 26, 38, 0.8) 50%,
+                rgba(34, 197, 94, 0.08) 100%
+            );
+            animation: subtleBreathing 4s ease-in-out infinite;
+        }
+
+        .mtm-display.loss {
+            background: linear-gradient(
+                165deg,
+                rgba(239, 68, 68, 0.05) 0%,
+                rgba(26, 26, 38, 0.8) 50%,
+                rgba(239, 68, 68, 0.08) 100%
+            );
+            animation: subtleBreathing 4s ease-in-out infinite;
+        }
+
+        @keyframes subtleBreathing {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        body.light-mode .mtm-display {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        body.light-mode .mtm-display.profit {
+            background: linear-gradient(
+                165deg,
+                rgba(16, 185, 129, 0.05) 0%,
+                rgba(255, 255, 255, 0.9) 50%,
+                rgba(16, 185, 129, 0.08) 100%
+            );
+        }
+
+        body.light-mode .mtm-display.loss {
+            background: linear-gradient(
+                165deg,
+                rgba(239, 68, 68, 0.05) 0%,
+                rgba(255, 255, 255, 0.9) 50%,
+                rgba(239, 68, 68, 0.08) 100%
+            );
+        }
+
+        .mtm-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            z-index: 2;
+            position: relative;
+        }
+
+        #mtm {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .mtm-value.positive {
+            color: #22c55e;
+            text-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+        }
+
+        .mtm-value.negative {
+            color: #ef4444;
+            text-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+        }
+
+        body.light-mode .mtm-value.positive {
+            color: #15803d;
+            text-shadow: none;
+        }
+
+        body.light-mode .mtm-value.negative {
+            color: #dc2626;
+            text-shadow: none;
+        }
+
+        .mtm-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-right: 8px;
+            opacity: 0.8;
+        }
+
+        /* Enhanced profit/loss colors */
+        .positive { 
+            color: #00e676 !important; /* Brighter green */
+            text-shadow: 0 0 8px rgba(0, 230, 118, 0.3);
+        }
+        .negative { 
+            color: #ff1744 !important; /* Brighter red */
+            text-shadow: 0 0 8px rgba(255, 23, 68, 0.3);
+        }
+
+        body.light-mode .positive {
+            color: #00c853 !important; /* Adjusted for light mode */
+            text-shadow: none;
+        }
+        body.light-mode .negative {
+            color: #d50000 !important; /* Adjusted for light mode */
+            text-shadow: none;
+        }
+
+        /* Remove transition delay from orders table */
+        #ordersTable tbody {
+            transition: none !important;
+        }
+        
+        /* Simplified search box without icon */
+        .search-box {
+            padding: 0 !important;
+        }
+        
+        .search-box input {
+            padding: 6px 10px;
+            width: 100%;
+        }
+        
+        /* Update MTM display colors */
+        .mtm-display.profit::before {
+            background: linear-gradient(45deg, 
+                rgba(0, 230, 118, 0.15), 
+                rgba(0, 230, 118, 0.25));
+        }
+        
+        .mtm-display.loss::before {
+            background: linear-gradient(45deg, 
+                rgba(255, 23, 68, 0.15), 
+                rgba(255, 23, 68, 0.25));
+        }
+        
+        /* Order type badges with enhanced colors */
+        .order-type-buy {
+            background: rgba(0, 230, 118, 0.15) !important;
+            color: #00e676 !important;
+            border: 1px solid rgba(0, 230, 118, 0.3) !important;
+        }
+        
+        .order-type-sell {
+            background: rgba(255, 23, 68, 0.15) !important;
+            color: #ff1744 !important;
+            border: 1px solid rgba(255, 23, 68, 0.3) !important;
+        }
+
+        /* Enhanced Mobile Responsive Styles - Replace existing media queries */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px 8px;
+                font-size: 14px;
+            }
+
+            .header {
+                margin-bottom: 10px;
+                padding: 8px 10px;
+            }
+
+            .title {
+                font-size: 16px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                margin-bottom: 70px; /* Space for footer */
+            }
+
+            .side-panel {
+                grid-column: 1;
+            }
+
+            .positions-card {
+                min-height: unset;
+            }
+
+            /* Stack all cards */
+            .card {
+                padding: 10px;
+                border-radius: 8px;
+                margin-bottom: 10px;
+            }
+
+            /* Mobile-optimized header */
+            .positions-header {
+                flex-direction: column;
+                gap: 10px;
+                margin-bottom: 10px;
+            }
+
+            .header-row {
+                flex-direction: column;
+                gap: 8px;
+                align-items: flex-start;
+            }
+
+            .positions-title-wrapper {
+                flex-direction: column;
+                gap: 8px;
+                align-items: flex-start;
+            }
+
+            .positions-status {
+                margin-left: 0;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            /* Zerodha-like table styles for mobile */
+            table {
+                font-size: 12px;
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                border: none;
+                background: transparent;
+            }
+
+            th, td {
+                padding: 8px 6px;
+                text-align: left;
+                white-space: nowrap;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            /* Hide less important columns on mobile */
+            #positionsTable th:nth-child(2),
+            #positionsTable td:nth-child(2),
+            #positionsTable th:nth-child(4),
+            #positionsTable td:nth-child(4),
+            #ordersTable th:nth-child(6),
+            #ordersTable td:nth-child(6) {
+                display: none;
+            }
+
+            /* Optimize filter controls */
+            .order-filters {
+                flex-direction: column;
+                gap: 8px;
+                width: 100%;
+            }
+
+            .order-segmented-control {
+                width: 100%;
+                margin-bottom: 8px;
+            }
+
+            .segmented-btn {
+                flex: 1;
+                text-align: center;
+                padding: 10px 8px;
+                font-size: 12px;
+                height: 36px;
+            }
+
+            /* Make search boxes full width */
+            .positions-search-box,
+            .search-box {
+                width: 100%;
+                margin: 0;
+            }
+
+            /* Make MTM display stand out */
+            .mtm-display {
+                width: 100%;
+                margin-top: 8px;
+                padding: 10px;
+                border-radius: 8px;
+            }
+
+            /* Zerodha-like footer */
+            .footer {
+                height: auto;
+                padding: 10px;
+                background: var(--header-bg);
+                border-top: 1px solid var(--border-color);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                font-size: 12px;
+            }
+
+            /* Optimize card headers */
+            .card-header {
+                padding-bottom: 8px;
+                margin-bottom: 10px;
+            }
+
+            .card-title {
+                font-size: 15px;
+                margin-bottom: 5px;
+            }
+
+            /* Make buttons more tappable */
+            .theme-toggle,
+            .back-btn {
+                min-width: 36px;
+                min-height: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Add bottom shadow to header for clarity */
+            .header {
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Improve search field appearance */
+            .search-box input,
+            .positions-search-box input {
+                height: 36px;
+                padding: 0 12px;
+                border-radius: 6px;
+            }
+
+            /* Improve badges and status indicators */
+            .status-badge,
+            .product-type,
+            .order-type-buy,
+            .order-type-sell {
+                padding: 2px 6px;
+                border-radius: 3px;
+                font-size: 10px;
+                font-weight: 600;
+            }
+
+            /* Match Zerodha's compact positions view */
+            #positionsTable td {
+                padding: 10px 6px;
+                vertical-align: middle;
+            }
+
+            /* Highlight P&L column */
+            #positionsTable td:last-child {
+                font-weight: 600;
+            }
+        }
+
+        /* Additional optimizations for very small screens */
+        @media screen and (max-width: 380px) {
+            body {
+                padding: 5px;
+            }
+
+            .header {
+                padding: 6px 8px;
+            }
+
+            .title {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 6px 4px;
+                font-size: 11px;
+            }
+
+            .positions-count,
+            .status-badge,
+            .product-type {
+                font-size: 9px;
+                padding: 1px 4px;
+            }
+
+            /* Even more compact positions display */
+            #positionsTable td {
+                padding: 8px 4px;
+            }
+
+            /* Further optimize buttons */
+            .theme-toggle,
+            .back-btn {
+                min-width: 32px;
+                min-height: 32px;
+            }
+        }
+
+        /* Add these new mobile optimizations to CSS */
+        .mobile-view .position-row,
+        .mobile-view #ordersTable tbody tr {
+            transition: background-color 0.15s;
+        }
+
+        .mobile-view .row-touched {
+            background-color: var(--table-hover-bg) !important;
+        }
+
+        /* Zerodha-like card styles for mobile */
+        .mobile-view .card {
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+        }
+
+        .mobile-view .card-header {
+            padding: 12px 10px;
+        }
+
+        /* Enhance scrolling on mobile */
+        .mobile-view {
+            -webkit-overflow-scrolling: touch;
+            overflow-y: auto;
+        }
+
+        /* Fix iOS button appearance */
+        .mobile-view button {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        /* Zerodha-like active tap state for buttons */
+        .mobile-view .segmented-btn:active,
+        .mobile-view .theme-toggle:active,
+        .mobile-view .back-btn:active {
+            opacity: 0.7;
+            transform: scale(0.98);
+        }
+
+        /* Optimize for iPhone notch */
+        @supports (padding-top: env(safe-area-inset-top)) {
+            .mobile-view .header {
+                padding-top: calc(env(safe-area-inset-top) + 8px);
+            }
+            
+            .mobile-view .footer {
+                padding-bottom: calc(env(safe-area-inset-bottom) + 8px);
+            }
+        }
+
+        .status-rejected {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        /* Scanner Card Styles */
+        .scanner-card {
+            margin-bottom: 70px; /* Space for footer */
+            width: 100%;
+        }
+
+        .scanner-actions {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+        }
+
+        .scan-btn {
+            background: linear-gradient(120deg, #9333EA, #7C3AED);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .scan-btn:hover {
+            opacity: 0.9;
+        }
+
+        #scannerTable {
+            margin-top: 15px;
+        }
+
+        #scannerTable th, #scannerTable td {
+            font-size: 12px;
+        }
+
+        .gap-positive {
+            color: #22c55e;
+            font-weight: 500;
+        }
+
+        /* Add scanner specific styles */
+        .trending-indicator {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(234, 88, 12, 0.2);
+            color: #fb923c;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin-left: 8px;
+            border: 1px solid rgba(251, 146, 60, 0.3);
+            gap: 4px;
+        }
+
+        /* Update scanner table columns */
+        #scannerTable th:nth-child(1), 
+        #scannerTable td:nth-child(1) {
+            width: 5%; /* N column */
+        }
+
+        #scannerTable th:nth-child(2), 
+        #scannerTable td:nth-child(2) {
+            width: 15%; /* Symbol column */
+        }
+
+        #scannerTable th:nth-child(3), 
+        #scannerTable td:nth-child(3) {
+            width: 30%; /* Name column */
+        }
+
+        #scannerTable th:nth-child(4), 
+        #scannerTable td:nth-child(4) {
+            width: 10%; /* Segment column */
+        }
+
+        #scannerTable th:nth-child(5), 
+        #scannerTable td:nth-child(5) {
+            width: 15%; /* Price column */
+        }
+
+        #scannerTable th:nth-child(6), 
+        #scannerTable td:nth-child(6) {
+            width: 10%; /* Change column */
+        }
+
+        #scannerTable th:nth-child(7), 
+        #scannerTable td:nth-child(7) {
+            width: 15%; /* Trade column */
+        }
+
+        /* Update trade buttons */
+        .trade-btn {
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .trade-btn.buy {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .trade-btn.sell {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .trade-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .trade-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        /* Notification styles */
+        .notification-container {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        .notification {
+            background: rgba(45, 45, 65, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 10px;
+            min-width: 300px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            border-left: 4px solid #22c55e;
+        }
+
+        .notification.error {
+            border-left: 4px solid #ef4444;
+        }
+
+        .notification-icon {
+            font-size: 20px;
+        }
+
+        .notification.success .notification-icon {
+            color: #22c55e;
+        }
+
+        .notification.error .notification-icon {
+            color: #ef4444;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .notification-message {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+        }
+
+        .notification-close {
+            color: rgba(255, 255, 255, 0.5);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            font-size: 18px;
+            transition: color 0.2s ease;
+        }
+
+        .notification-close:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .notification.info {
+            border-left: 4px solid #3B82F6;
+        }
+
+        .notification.info .notification-icon {
+            color: #3B82F6;
+        }
+
+        .loading-row {
+            text-align: center;
+            color: #a0a0a0;
+            padding: 20px;
+        }
+
+        .loading-row i {
+            margin-right: 8px;
+        }
+
+        /* Add these new styles for order indicators */
+        .order-tab-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .order-count {
+            background: rgba(162, 119, 255, 0.15);
+            color: #a277ff;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 500;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .blinking-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #22c55e;
+            margin-right: 4px;
+            display: none;
+        }
+
+        .blinking-dot.active {
+            display: inline-block;
+            animation: blink-dot 1s infinite;
+        }
+
+        @keyframes blink-dot {
+            0% { opacity: 0.2; }
+            50% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+
+        body.light-mode .order-count {
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
+        }
+
+        /* Trade Settings Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: rgba(45, 45, 65, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .popup-title {
+            font-size: 18px;
+            color: #a277ff;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 5px;
+        }
+
+        .settings-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .currency {
+            background: rgba(0, 0, 0, 0.3);
+            color: #a0a0a0;
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            padding: 10px;
+            width: 100%;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .help-text {
+            font-size: 12px;
+            color: #a0a0a0;
+        }
+
+        .save-btn {
+            background: linear-gradient(120deg, #9333EA, #7C3AED);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .save-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Enhanced trade buttons */
+        .trade-btn {
+            min-width: 50px;
+            font-weight: 600;
+            border-radius: 6px;
+            padding: 6px 12px;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .trade-btn.buy {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+        }
+
+        .trade-btn.sell {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border: none;
+        }
+
+        .trade-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .trade-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Update footer to add trade settings button */
+        footer.footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .footer-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-btn {
+            background: rgba(162, 119, 255, 0.1);
+            color: #a277ff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(162, 119, 255, 0.3);
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .footer-btn:hover {
+            background: rgba(162, 119, 255, 0.2);
+        }
+
+        /* Add trade settings popup styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: #1f1f2e;
+            border-radius: 12px;
+            width: 400px;
+            max-width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid #3c3c57;
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #3c3c57;
+        }
+
+        .popup-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #a277ff;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #a0a0a0;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+        }
+
+        .close-btn:hover {
+            color: #fff;
+        }
+
+        .settings-form {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #a277ff;
+            font-weight: 500;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            padding: 8px 12px;
+        }
+
+        .currency {
+            color: #a0a0a0;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            width: 100%;
+            outline: none;
+        }
+
+        .help-text {
+            font-size: 12px;
+            color: #a0a0a0;
+            margin-top: 6px;
+        }
+
+        .save-btn {
+            background: linear-gradient(120deg, #9333EA, #7C3AED);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .save-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Style for the trade settings button in the footer */
+        .data-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(99, 102, 241, 0.15);
+            color: #8b5cf6;
+            font-size: 13px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .data-btn:hover {
+            background: rgba(99, 102, 241, 0.25);
+        }
+
+        body.light-mode .data-btn {
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        body.light-mode .data-btn:hover {
+            background: rgba(99, 102, 241, 0.2);
+        }
+
+        /* Fix order and position card display */
+        .mini-card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            height: 300px; /* Fixed height */
+            overflow-y: auto;
+            transition: all 0.3s ease;
+            /* Custom scrollbar */
+            scrollbar-width: thin;
+            scrollbar-color: rgba(162, 119, 255, 0.3) transparent;
+        }
+        
+        /* Custom scrollbar for Webkit browsers */
+        .mini-card::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .mini-card::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .mini-card::-webkit-scrollbar-thumb {
+            background-color: rgba(162, 119, 255, 0.3);
+            border-radius: 4px;
+        }
+        
+        /* Prevent word wrap in table cells */
+        #ordersTable td, #positionsTable td {
+            white-space: nowrap;
+            padding: 8px 12px;
+        }
+        
+        /* Adjust order time display to fit on one line */
+        .order-time {
+            white-space: nowrap;
+            font-size: 12px;
+        }
+
+        /* Fix order and position card display - ensure this CSS has highest specificity */
+        .orders-section .mini-card,
+        .positions-section .mini-card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            height: 300px !important; /* Fixed height with !important to override */
+            max-height: 300px !important;
+            overflow-y: auto !important;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(162, 119, 255, 0.3) transparent;
+        }
+        
+        /* Add table wrapper to ensure scrolling works properly */
+        .mini-card .table-wrapper {
+            overflow-y: auto;
+            flex-grow: 1;
+            /* Prevent growing beyond container */
+            max-height: calc(100% - 40px);
+        }
+        
+        .mini-card-header {
+            flex-shrink: 0; /* Prevent header from shrinking */
+        }
+        
+        /* Custom scrollbar for Webkit browsers */
+        .mini-card::-webkit-scrollbar,
+        .table-wrapper::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .mini-card::-webkit-scrollbar-track,
+        .table-wrapper::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .mini-card::-webkit-scrollbar-thumb,
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background-color: rgba(162, 119, 255, 0.3);
+            border-radius: 4px;
+        }
+        
+        /* Prevent word wrap in table cells and ensure consistent padding */
+        #ordersTable td, 
+        #positionsTable td {
+            white-space: nowrap;
+            padding: 8px 12px !important;
+        }
+        
+        /* Adjust order time display to fit on one line */
+        .order-time {
+            white-space: nowrap;
+            font-size: 12px;
+        }
+        
+        /* Ensure tables fill the container width */
+        .mini-card table {
+            width: 100%;
+            table-layout: fixed;
+        }
+        
+        /* Ensure consistent card bottom padding */
+        .mini-card {
+            padding-bottom: 12px !important;
+        }
+
+        /* Override mini-card styles with high specificity and !important */
+        .orders-section .mini-card,
+        .orders-section .card,
+        .side-panel .card {
+            height: 300px !important;
+            max-height: 300px !important;
+            overflow: hidden !important; /* Hide overflow on container */
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        /* Ensure table-wrapper takes remaining height and handles scrolling */
+        .table-wrapper {
+            flex: 1 1 auto !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            margin-bottom: 5px !important;
+            position: relative !important;
+            max-height: calc(100% - 50px) !important;
+        }
+
+        /* Force scrollbars to appear with webkit browsers */
+        .table-wrapper::-webkit-scrollbar {
+            width: 8px !important;
+            height: 8px !important;
+            display: block !important;
+        }
+
+        .table-wrapper::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1) !important;
+            border-radius: 4px !important;
+        }
+
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background: rgba(162, 119, 255, 0.4) !important;
+            border-radius: 4px !important;
+        }
+
+        /* Ensure consistent padding */
+        .table-wrapper table {
+            width: 100% !important;
+            margin-bottom: 0 !important;
+        }
+
+        /* Force white-space nowrap on all cells */
+        #ordersTable th, 
+        #ordersTable td,
+        #positionsTable th,
+        #positionsTable td {
+            white-space: nowrap !important;
+            text-overflow: ellipsis !important;
+            overflow: hidden !important;
+            max-width: 150px !important;
+        }
+
+        /* Ensure card headers don't flex */
+        .mini-card-header,
+        .card-header {
+            flex: 0 0 auto !important;
+        }
+
+        /* Footer alignment fixes */
+        .footer-info {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            margin-top: auto !important;
+            margin-bottom: 0 !important;
+            padding: 8px 0 0 0 !important;
+            border-top: 1px solid var(--border-color) !important;
+            font-size: 12px !important;
+            color: #a0a0a0 !important;
+            flex: 0 0 30px !important; /* Fixed height for footer */
+            height: 30px !important;
+            position: relative !important;
+            bottom: 0 !important;
+        }
+
+        /* Ensure consistent card layout */
+        .orders-card {
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        /* Improve footer alignment between cards */
+        .side-panel .card,
+        .positions-card {
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        /* Fix possible table expansion */
+        .orders-section table,
+        .positions-section table {
+            table-layout: fixed !important;
+        }
+
+        /* Force nowrap on time column specifically */
+        #ordersTable th:first-child, 
+        #ordersTable td:first-child {
+            white-space: nowrap !important;
+            width: 100px !important;  /* Fixed width for time column */
+            max-width: 100px !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
+        /* Fix card heights and make them taller */
+        .orders-section .mini-card,
+        .orders-section .card,
+        .side-panel .card {
+            height: 400px !important; /* Increased from 300px to 400px */
+            max-height: 400px !important;
+            overflow: hidden !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        /* Ensure table-wrapper takes remaining height and handles scrolling */
+        .table-wrapper {
+            flex: 1 1 auto !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            margin-bottom: 5px !important;
+            position: relative !important;
+            max-height: calc(100% - 50px) !important;
+        }
+
+        /* Make table headers sticky when scrolling */
+        #ordersTable thead tr th,
+        #positionsTable thead tr th {
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 10 !important;
+            background: var(--table-header-bg) !important;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+        }
+
+        /* Fix time column cropping - make it wider */
+        #ordersTable th:first-child, 
+        #ordersTable td:first-child {
+            white-space: nowrap !important;
+            width: 120px !important; /* Increased from 100px to 120px */
+            min-width: 120px !important;
+            max-width: 120px !important;
+            overflow: visible !important; /* Changed from hidden to visible */
+            text-overflow: clip !important; /* Changed from ellipsis to clip */
+        }
+
+        /* Ensure consistent card footer alignment */
+        .footer-info {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            margin-top: auto !important;
+            margin-bottom: 0 !important;
+            padding: 8px 0 0 0 !important;
+            border-top: 1px solid var(--border-color) !important;
+            font-size: 12px !important;
+            color: #a0a0a0 !important;
+            flex: 0 0 30px !important; /* Fixed height for footer */
+            height: 30px !important;
+            position: relative !important;
+            bottom: 0 !important;
+        }
+
+        /* Fix position/order cards to have identical structure */
+        .side-panel .card-header,
+        .positions-card .card-header,
+        .side-panel .mini-card-header,
+        .positions-card .mini-card-header {
+            flex: 0 0 auto !important;
+            margin-bottom: 10px !important;
+        }
+
+        /* Ensure both card types have identical bottom padding */
+        .orders-section .card,
+        .positions-card {
+            padding-bottom: 10px !important;
+        }
+
+        /* Fix column widths to prevent time cutoff */
+        #ordersTable th:first-child, 
+        #ordersTable td:first-child {
+            min-width: 125px !important;
+            width: 125px !important;
+        }
+
+        .price-up {
+            background-color: rgba(34, 197, 94, 0.2) !important;
+            transition: background-color 1s;
+        }
+        .price-down {
+            background-color: rgba(239, 68, 68, 0.2) !important;
+            transition: background-color 1s;
+        }
+
+        #scannerTable .price-value {
+            display: inline-block;
+            min-width: 80px;
+        }
+        #scannerTable td:nth-child(5) {
+            min-width: 120px;
+            transition: background-color 0.5s ease;
+        }
+
+        /* Remove old scanner styles and add new drawer styles */
+        /* Scanner Drawer Styles */
+        .scanner-drawer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80vh;
+            background: var(--bg-card);
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+        }
+
+        .scanner-drawer.open {
+            transform: translateY(0);
+        }
+
+        .scanner-handle {
+            width: 50px;
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            margin: 12px auto;
+            cursor: pointer;
+        }
+
+        .scanner-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 20px 20px 20px;
+        }
+
+        .scanner-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px; /* Increased horizontal padding */
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .scanner-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .scanner-actions {
+            display: flex;
+            gap: 15px; /* Increased gap between buttons */
+            align-items: center;
+        }
+
+        .scanner-btn {
+            height: 38px;
+            min-width: 120px; /* Added min-width to ensure buttons don't get too small */
+            padding: 0 20px; /* Increased horizontal padding */
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center button content */
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .scanner-btn i {
+            font-size: 14px;
+        }
+
+        .scanner-btn.scan-btn {
+            background: linear-gradient(135deg, #ff7e5f, #feb47b); /* Energetic gradient */
+            color: white;
+        }
+
+        .scanner-btn.scan-btn:hover {
+            background: linear-gradient(135deg, #ff7e5f, #feb47b); /* Same gradient on hover */
+            opacity: 0.9;
+        }
+
+        .scanner-btn.close-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .scanner-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .scanner-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Add new scanner loading styles */
+        .scanner-loading {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            background: rgba(147, 51, 234, 0.1);
+            border: 1px solid rgba(147, 51, 234, 0.2);
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin: 15px 20px;
+            color: #9333EA;
+            font-size: 13px;
+        }
+
+        .scanner-loading.active {
+            display: flex;
+        }
+
+        .scanner-loading i {
+            animation: spin 1s linear infinite;
+        }
+
+        .scanner-loading-bar {
+            flex: 1;
+            height: 2px;
+            background: rgba(147, 51, 234, 0.2);
+            border-radius: 1px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .scanner-loading-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 30%;
+            background: #9333EA;
+            border-radius: 1px;
+            animation: loading 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(400%); }
+        }
+
+        .scanner-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .scanner-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Update footer styles */
+        .footer-btn.scanner-toggle {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-btn.scanner-toggle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .footer-btn.scanner-toggle:hover::before {
+            left: 100%;
+        }
+
+        /* Enhance table styles specifically for scanner */
+        .scanner-content #scannerTable {
+            margin-top: 20px;
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+        }
+
+        .scanner-content #scannerTable th {
+            background: var(--table-header-bg);
+            padding: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .scanner-content #scannerTable td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 13px;
+        }
+
+        .scanner-content #scannerTable tr:hover {
+            background: var(--table-hover-bg);
+        }
+
+        /* Card height alignment fixes */
+        .orders-section .mini-card,
+        .orders-section .card,
+        .side-panel .card {
+            height: 450px !important; /* Increased height for better visibility */
+            max-height: 450px !important;
+        }
+
+        /* Footer info alignment fix */
+        .footer-info {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important; /* Reduced gap between text and time */
+            justify-content: flex-start !important;
+            margin-top: auto !important;
+            padding: 8px 12px !important; /* Added horizontal padding */
+            border-top: 1px solid var(--border-color) !important;
+            font-size: 12px !important;
+            color: #a0a0a0 !important;
+        }
+
+        /* Enhanced scanner button style */
+        .scanner-btn.scan-btn {
+            background: linear-gradient(135deg, #7C3AED, #9333EA); /* Professional gradient */
+            color: white;
+            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
+            transition: all 0.2s ease;
+        }
+
+        .scanner-btn.scan-btn:hover {
+            background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .scanner-btn.scan-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(124, 58, 237, 0.2);
+        }
+
+        /* Fix card heights to match exactly */
+        .orders-section .mini-card,
+        .orders-section .card,
+        .side-panel .card,
+        .positions-card {
+            height: 450px !important;
+            max-height: 450px !important;
+            overflow: hidden !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        /* Make sure table wrappers in both cards have identical heights */
+        .table-wrapper {
+            flex: 1 1 auto !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            margin-bottom: 5px !important;
+            position: relative !important;
+            max-height: calc(450px - 110px) !important; /* Account for header and footer */
+        }
+
+        /* Update scanner button in footer to make it more prominent */
+        .footer-btn.scanner-toggle {
+            background: linear-gradient(135deg, #7C3AED, #9333EA) !important;
+            color: white !important;
+            border: none !important;
+            padding: 8px 16px !important;
+            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25) !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .footer-btn.scanner-toggle:hover {
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35) !important;
+        }
+
+        .footer-btn.scanner-toggle:active {
+            transform: translateY(0) !important;
+            box-shadow: 0 2px 4px rgba(124, 58, 237, 0.2) !important;
+        }
+
+        .leverage-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-right: 10px;
+        }
+
+        .leverage-toggle.active {
+            background: rgba(162, 119, 255, 0.1);
+            color: #a277ff;
+            border-color: rgba(162, 119, 255, 0.3);
+        }
+
+        .leverage-indicator {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        body.light-mode .leverage-toggle.active {
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .positions-divider {
+            background: var(--table-header-bg);
+            padding: 12px 15px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-top: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        body.light-mode .positions-divider {
+            background: rgba(99, 102, 241, 0.08);
+            color: #6366f1;
+            border-color: rgba(99, 102, 241, 0.2);
+        }
+
+        .positions-divider i {
+            margin-right: 8px;
+            font-size: 12px;
+        }
+
+        /* Update the closed positions divider */
+        .positions-divider {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px 15px;
+            font-size: 13px;
+            color: #94a3b8;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-top: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        body.light-mode .positions-divider {
+            background: rgba(99, 102, 241, 0.05);
+            color: #6366f1;
+            border-color: rgba(99, 102, 241, 0.1);
+        }
+
+        /* Style for closed position rows */
+        .position-row.closed {
+            background: rgba(0, 0, 0, 0.1);
+            opacity: 0.75;
+        }
+
+        body.light-mode .position-row.closed {
+            background: rgba(99, 102, 241, 0.02);
+        }
+
+        /* Increase card heights */
+        .orders-section .mini-card,
+        .orders-section .card,
+        .side-panel .card,
+        .positions-card {
+            height: 550px !important;
+            max-height: 550px !important;
+        }
+
+        /* Adjust table wrapper height for new card size */
+        .table-wrapper {
+            max-height: calc(550px - 110px) !important;
+        }
+
+        /* Increase card heights */
+        .positions-card,
+        .orders-card,
+        .card {
+            height: 550px !important;
+            max-height: 550px !important;
+            overflow: hidden;
+        }
+
+        /* Adjust table wrapper height for new card size */
+        .table-wrapper {
+            max-height: calc(550px - 110px) !important;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+        }
+
+        /* Custom scrollbar for Webkit browsers */
+        .table-wrapper::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .table-wrapper::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        /* Remove previous conflicting height rules */
+        .orders-section .mini-card,
+        .orders-section .card,
+        .side-panel .card {
+            height: auto;
+            max-height: none;
+        }
+
+        /* Define theme variables */
+        :root {
+            --bg-primary-dark: #1e1e2e;
+            --bg-primary-light: #f0f4ff;
+            --text-primary-dark: #ffffff;
+            --text-primary-light: #1a1a2e;
+            --border-color-dark: rgba(255, 255, 255, 0.1);
+            --border-color-light: rgba(0, 0, 0, 0.1);
+            --header-bg-dark: rgba(45, 45, 65, 0.7);
+            --header-bg-light: rgba(255, 255, 255, 0.9);
+            --title-gradient-dark: linear-gradient(120deg, #a277ff, #61ffca);
+            --title-gradient-light: linear-gradient(120deg, #6366f1, #8b5cf6);
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        body.dark-mode {
+            --bg-primary: var(--bg-primary-dark);
+            --text-primary: var(--text-primary-dark);
+            --border-color: var(--border-color-dark);
+            --header-bg: var(--header-bg-dark);
+            --title-gradient: var(--title-gradient-dark);
+        }
+
+        body.light-mode {
+            --bg-primary: var(--bg-primary-light);
+            --text-primary: var(--text-primary-light);
+            --border-color: var(--border-color-light);
+            --header-bg: var(--header-bg-light);
+            --title-gradient: var(--title-gradient-light);
+        }
+
+        /* ... existing styles ... */
+
+        body.light-mode .nav-tabs {
+            background: rgba(240, 240, 255, 0.9);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        body.light-mode .nav-tab.active {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: #fff;
+        }
+
+        body.light-mode .nav-tab:not(.active) {
+            color: #a0aec0;
+        }
+
+        body.light-mode .nav-tab:not(.active):hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
+        }
