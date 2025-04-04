@@ -1139,6 +1139,163 @@
                 padding: 2px;
             }
         }
+
+        /* Enhanced Intro Section */
+        .intro-section {
+            background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+            border-radius: 20px;
+            padding: 50px;
+            margin: 30px 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.05)"/></svg>') center/cover;
+            opacity: 0.1;
+        }
+
+        /* Enhanced Card Design */
+        .card {
+            border-radius: 25px;
+            padding: 35px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        /* Card 1: Professional Trading Style */
+        .card:nth-child(1) {
+            background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
+        }
+
+        /* Card 2: Premium Look */
+        .card:nth-child(2) {
+            background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+        }
+
+        /* Enhanced Join Button */
+        .join-btn {
+            background: linear-gradient(90deg, #ff416c 0%, #ff4b2b 100%);
+            padding: 15px 35px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .join-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .join-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Enhanced Strategy Points */
+        .strategy-points li {
+            background: rgba(255, 255, 255, 0.1);
+            margin: 12px 0;
+            padding: 15px 20px 15px 45px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .strategy-points li::before {
+            content: '✓';
+            position: absolute;
+            left: 15px;
+            color: #4eff91;
+            font-weight: bold;
+        }
+
+        /* Enhanced FAQ Section */
+        .faq-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 80px 20px;
+            border-radius: 30px;
+            margin: 40px auto;
+        }
+
+        .faq-item {
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Enhanced Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, #f6f9fc 0%, #f1f4f8 100%);
+            border-radius: 20px;
+            margin: 40px 20px;
+            padding: 40px;
+        }
+
+        .contact-section a {
+            transform: scale(1);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-section a:hover {
+            transform: scale(1.05);
+        }
+
+        /* Social Proof Section */
+        .social-proof {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            margin: 30px 0;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 30px 0;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .stat-label {
+            color: #64748b;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
@@ -1176,7 +1333,7 @@
 </p>
 
         </div>
-    </div>
+
 <hr>
     <!-- Background section to visually separate Master Your Financial Strategies -->
     <div class="background-section">
@@ -1202,12 +1359,12 @@
 					
 				                    <ul class="strategy-points">
                  
-	   <li>✅ How do I select Trending Stocks for Intraday?</li>
-       <li>✅ How to decide for BUY or SELL? </li>
-		<li>✅Target & Stoploss</li>
-		<li>✅Risk & Money Management</li>
-		<li>✅Intraday Psychology</li>
-			<li>✅Lifetime Free Community Channel Support</li>
+	   <li>How do I select Trending Stocks for Intraday?</li>
+       <li>How to decide for BUY or SELL? </li>
+		<li>Target & Stoploss</li>
+		<li>Risk & Money Management</li>
+		<li>Intraday Psychology</li>
+			<li>Lifetime Free Community Channel Support</li>
 
                     <center><br>
 					  <p class="fee">1-1 Live Google Meet Session</p> <p class="fee">Fee: ₹5000/-</p>
@@ -1223,13 +1380,13 @@
                     <h2>Gold Swing Trading</h2>
                     <p>My Swing Trading System!</p><br>
                     <ul class="strategy-points">
-	   <li>✅ Simplest, High Probable & Stress-free Swing Trading Method!</li>    
-	   <li>✅ No complex chart analysis, screeners or stock selection</li>
-       <li>✅ Very minimal screen time</li>
-           <li>✅ Simple setup requires only a few minutes daily</li>
-       <li>✅ 1-3 High Probable Trades Per Month</li>
-       <li>✅ Min 1:2 Risk Reward Ratio</li>
-	   <li>✅Lifetime Free Community Channel Support</li>
+	   <li>Simplest, High Probable & Stress-free Swing Trading Method!</li>    
+	   <li>No complex chart analysis, screeners or stock selection</li>
+       <li>Very minimal screen time</li>
+           <li>Simple setup requires only a few minutes daily</li>
+       <li>1-3 High Probable Trades Per Month</li>
+       <li>Min 1:2 Risk Reward Ratio</li>
+	   <li>Lifetime Free Community Channel Support</li>
 
 
                     </ul>
@@ -1298,7 +1455,7 @@
             </a>
 
             <!-- Instagram Button -->
-            <a href="https://www.instagram.com/tradersk_stockmarket/" target="_blank" style="display: inline-flex; align-items: center; background-color: #E4405F; padding: 10px 20px; border-radius: 8px; color: white; text-decoration: none; font-weight: bold;">
+            <a href="https://www.instagram.com/sk.stockmarket/" target="_blank" style="display: inline-flex; align-items: center; background-color: #E4405F; padding: 10px 20px; border-radius: 8px; color: white; text-decoration: none; font-weight: bold;">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 24px; height: 24px; margin-right: 10px;">
                 Instagram DM
             </a>
